@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, j, count;
+    
+    // Input the size of the array
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Input elements of the array
+    printf("Enter %d integers:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Count the occurrences of each integer
+    int freq_count[n][2]; // 2D array to store integer and frequency
+    int freq_count_size = 0; // To keep track of unique integers
+
+    for (i = 0; i < n; i++) {
+        count = 1; // Reset count for each new integer
+        // Check if the integer is already counted
+        for (j = 0; j < freq_count_size; j++) {
+            if (freq_count[j][0] == arr[i]) {
+                freq_count[j][1]++;
+                count = 0; // Mark as counted
+                break;
+            }
+        }
+        // If not counted, add it to the 2D array
+        if (count) {
+            freq_count[freq_count_size][0] = arr[i];
+            freq_count[freq_count_size][1] = 1;
+            freq_count_size++;
+        }
+    }
+
+    // Display the result
+    printf("Integer\tFrequency\n");
+    for (i = 0; i < freq_count_size; i++) {
+        printf("%d\t%d\n", freq_count[i][0], freq_count[i][1]);
+    }
+
+    return 0;
+}
